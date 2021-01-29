@@ -12,10 +12,32 @@ class RecordsController < ApplicationController
 
     respond_to do |format|
       if @record_item.save
-        format.html { redirect_to records_url, notice: 'Portfolio Item was successfully created.' }
+        format.html { redirect_to records_path, notice: 'Portfolio Item was successfully created.' }
       else
         format.html { render :new }
       end
     end
+  end
+
+  def edit
+    @record_item = Record.find(params[:id])
+  end
+
+  def update
+    @record_item = Record.find(params[:id])
+
+    respond_to do |format|
+      if @record_item.update(params.require(:record).permit(:title, :subtitle, :body))
+        format.html { redirect_to records_path, notice: 'Record was successfully updated.' }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
+
+  private
+
+  def portfolio_params
+    params.require(:record).permit(:title, :subtitle, :body)
   end
 end
