@@ -35,7 +35,12 @@ class RecordsController < ApplicationController
     end
   end
 
+  def show
+    @record_item = Record.find(params[:id])
+  end
+
   private
+
 
   def portfolio_params
     params.require(:record).permit(:title, :subtitle, :body)

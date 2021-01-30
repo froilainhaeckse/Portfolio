@@ -1,0 +1,10 @@
+<%= image_tag @record_item.main_image unless @record_item.main_image.nil? %>
+
+<h1><%= @record_item.title %></h1>
+
+<em><%= @record_item.subtitle %></em>
+
+<p><%= @record_item.body %></p>
+<%= image_tag @record_item.thumb_image unless @record_item.thumb_image.nil? %>
+
+<%= link_to "Edit", edit_record_path(@record_item.id) %>
