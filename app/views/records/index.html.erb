@@ -1,7 +1,10 @@
 <h1>Portfolio items</h1>
 
+<%= link_to "Create New Item", new_record_path %>
+
 <% @record_items.each do |record_item| %>
   <p><%= record_item.title %></p>
   <p><%= record_item.subtitle %></p>
   <%= image_tag record_item.thumb_image unless record_item.thumb_image.nil? %>
+  <%= link_to "Edit", edit_record_path(record_item.id) %>
 <% end %>
