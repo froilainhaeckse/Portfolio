@@ -1,4 +1,6 @@
 class RecordsController < ApplicationController
+  before_action :set_record_item, only: %i[show edit update destroy]
+
   def index
     @record_items = Record.all
   end
@@ -8,7 +10,7 @@ class RecordsController < ApplicationController
   end
 
   def create
-    @record_item = Record.new(params.require(:record).permit(:title, :subtitle, :body))
+    @record_item = Record.new(portfolio_params)
 
     respond_to do |format|
       if @record_item.save
@@ -20,12 +22,9 @@ class RecordsController < ApplicationController
   end
 
   def edit
-    @record_item = Record.find(params[:id])
   end
 
   def update
-    @record_item = Record.find(params[:id])
-
     respond_to do |format|
       if @record_item.update(params.require(:record).permit(:title, :subtitle, :body))
         format.html { redirect_to records_path, notice: 'Record was successfully updated.' }
@@ -36,12 +35,9 @@ class RecordsController < ApplicationController
   end
 
   def show
-    @record_item = Record.find(params[:id])
   end
 
   def destroy
-    @record_item = Record.find(params[:id])
-
     @record_item.destroy
     respond_to do |format|
       format.html { redirect_to records_url, notice: 'Record item was successfully destroyed.' }
@@ -49,6 +45,10 @@ class RecordsController < ApplicationController
   end
 
   private
+  
+  def set_record_item
+    @record_item = Record.find(params[:id])
+  end
 
 
   def portfolio_params
