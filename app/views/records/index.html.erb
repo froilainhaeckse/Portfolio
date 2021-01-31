@@ -7,4 +7,5 @@
   <p><%= record_item.subtitle %></p>
   <%= image_tag record_item.thumb_image unless record_item.thumb_image.nil? %>
   <%= link_to "Edit", edit_record_path(record_item.id) %>
+  <%= link_to "Delete", record_path(record_item.id), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>

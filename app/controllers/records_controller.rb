@@ -39,6 +39,15 @@ class RecordsController < ApplicationController
     @record_item = Record.find(params[:id])
   end
 
+  def destroy
+    @record_item = Record.find(params[:id])
+
+    @record_item.destroy
+    respond_to do |format|
+      format.html { redirect_to records_url, notice: 'Record item was successfully destroyed.' }
+    end
+  end
+
   private
 
 
