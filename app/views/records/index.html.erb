@@ -1,0 +1,11 @@
+<h1>Portfolio items</h1>
+
+<%= link_to "Create New Item", new_record_path %>
+
+<% @record_items.each do |record_item| %>
+  <p><%= link_to record_item.title, portfolio_show_path(record_item.id) %></p>
+  <p><%= record_item.subtitle %></p>
+  <%= image_tag record_item.thumb_image unless record_item.thumb_image.nil? %>
+  <%= link_to "Edit", edit_record_path(record_item.id) %>
+  <%= link_to "Delete", record_item, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
